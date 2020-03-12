@@ -14,7 +14,7 @@ ENV ANDROID_SDK_TOOLS_VERSION="4333796"
 ENV ANDROID_NDK_VERSION="21"
 
 # nodejs version
-ENV NODE_VERSION="12.x"
+# ENV NODE_VERSION="12.x"
 
 # Set locale
 ENV LANG="en_US.UTF-8" \
@@ -72,24 +72,24 @@ RUN apt-get update -qq > /dev/null && \
         unzip \
         wget \
         zip \
-        zlib1g-dev > /dev/null && \
-    echo "Installing nodejs, npm, cordova, ionic, react-native" && \
-    curl -sL -k https://deb.nodesource.com/setup_${NODE_VERSION} \
-        | bash - > /dev/null && \
-    apt-get install -qq nodejs > /dev/null && \
-    apt-get clean > /dev/null && \
-    rm -rf /var/lib/apt/lists/ && \
-    npm install --quiet -g npm > /dev/null && \
-    npm install --quiet -g \
-        bower cordova eslint gulp \
-        ionic jshint karma-cli mocha \
-        node-gyp npm-check-updates \
-        react-native-cli > /dev/null && \
-    npm cache clean --force > /dev/null && \
-    rm -rf /tmp/* /var/tmp/* && \
-    echo "Installing fastlane" && \
-    gem install fastlane --quiet --no-document > /dev/null && \
-    gem install bundler --quiet --no-document > /dev/null
+        zlib1g-dev > /dev/null 
+ #   echo "Installing nodejs, npm, cordova, ionic, react-native" && \
+ #   curl -sL -k https://deb.nodesource.com/setup_${NODE_VERSION} \
+ #       | bash - > /dev/null && \
+ #   apt-get install -qq nodejs > /dev/null && \
+ #   apt-get clean > /dev/null && \
+ #   rm -rf /var/lib/apt/lists/ && \
+ #   npm install --quiet -g npm > /dev/null && \
+ #   npm install --quiet -g \
+ #       bower cordova eslint gulp \
+ #       ionic jshint karma-cli mocha \
+ #       node-gyp npm-check-updates \
+ #       react-native-cli > /dev/null && \
+ #   npm cache clean --force > /dev/null && \
+ #   rm -rf /tmp/* /var/tmp/* && \
+ #   echo "Installing fastlane" && \
+ #   gem install fastlane --quiet --no-document > /dev/null && \
+ #   gem install bundler --quiet --no-document > /dev/null
 
 # Install Android SDK
 RUN echo "Installing sdk tools ${ANDROID_SDK_TOOLS_VERSION}" && \
@@ -117,63 +117,67 @@ RUN echo "Installing sdk tools ${ANDROID_SDK_TOOLS_VERSION}" && \
         "platforms;android-28" \
         "platforms;android-27" \
         "platforms;android-26" \
-        "platforms;android-25" \
-        "platforms;android-24" \
-        "platforms;android-23" \
-        "platforms;android-22" \
-        "platforms;android-21" \
-        "platforms;android-20" \
-        "platforms;android-19" \
-        "platforms;android-18" \
-        "platforms;android-17" \
-        "platforms;android-16" > /dev/null && \
+#        "platforms;android-25" \
+#        "platforms;android-24" \
+#        "platforms;android-23" \
+#        "platforms;android-22" \
+#        "platforms;android-21" \
+#        "platforms;android-20" \
+#        "platforms;android-19" \
+#        "platforms;android-18" \
+#        "platforms;android-17" \
+#        "platforms;android-16" \
+        > /dev/null && \
     echo "Installing platform tools " && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
         "platform-tools" > /dev/null && \
     echo "Installing build tools " && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
         "build-tools;29.0.2" \
-        "build-tools;28.0.3" "build-tools;28.0.2" \
-        "build-tools;27.0.3" "build-tools;27.0.2" "build-tools;27.0.1" \
-        "build-tools;26.0.2" "build-tools;26.0.1" "build-tools;26.0.0" \
-        "build-tools;25.0.3" "build-tools;25.0.2" \
-        "build-tools;25.0.1" "build-tools;25.0.0" \
-        "build-tools;24.0.3" "build-tools;24.0.2" \
-        "build-tools;24.0.1" "build-tools;24.0.0" > /dev/null && \
+#        "build-tools;28.0.3" "build-tools;28.0.2" \
+#        "build-tools;27.0.3" "build-tools;27.0.2" "build-tools;27.0.1" \
+#        "build-tools;26.0.2" "build-tools;26.0.1" "build-tools;26.0.0" \
+#        "build-tools;25.0.3" "build-tools;25.0.2" \
+#        "build-tools;25.0.1" "build-tools;25.0.0" \
+#        "build-tools;24.0.3" "build-tools;24.0.2" \
+#        "build-tools;24.0.1" "build-tools;24.0.0" \
+        > /dev/null && \
     echo "Installing build tools " && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
         "build-tools;23.0.3" "build-tools;23.0.2" "build-tools;23.0.1" \
-        "build-tools;22.0.1" \
-        "build-tools;21.1.2" \
-        "build-tools;20.0.0" \
-        "build-tools;19.1.0" \
-        "build-tools;18.1.1" \
-        "build-tools;17.0.0" > /dev/null && \
-    echo "Installing extras " && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "extras;android;m2repository" \
-        "extras;google;m2repository" > /dev/null && \
-    echo "Installing play services " && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "extras;google;google_play_services" \
-        "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
-        "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" > /dev/null && \
-    echo "Installing Google APIs" && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "add-ons;addon-google_apis-google-24" \
-        "add-ons;addon-google_apis-google-23" \
-        "add-ons;addon-google_apis-google-22" \
-        "add-ons;addon-google_apis-google-21" \
-        "add-ons;addon-google_apis-google-19" \
-        "add-ons;addon-google_apis-google-18" \
-        "add-ons;addon-google_apis-google-17" \
-        "add-ons;addon-google_apis-google-16" > /dev/null && \
-    echo "Installing emulator " && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager "emulator" > /dev/null && \
-    echo "Installing kotlin" && \
-    wget --quiet -O sdk.install.sh "https://get.sdkman.io" && \
-    bash -c "bash ./sdk.install.sh > /dev/null && source ~/.sdkman/bin/sdkman-init.sh && sdk install kotlin" && \
-    rm -f sdk.install.sh && \
+#        "build-tools;22.0.1" \
+#        "build-tools;21.1.2" \
+#        "build-tools;20.0.0" \
+#        "build-tools;19.1.0" \
+#        "build-tools;18.1.1" \
+#        "build-tools;17.0.0" \
+        > /dev/null && \
+#    echo "Installing extras " && \
+#    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+#        "extras;android;m2repository" \
+#        "extras;google;m2repository" > /dev/null && \
+#    echo "Installing play services " && \
+#    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+#        "extras;google;google_play_services" \
+#        "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
+#        "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" > /dev/null && \
+#    echo "Installing Google APIs" && \
+#    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+#        "add-ons;addon-google_apis-google-24" \
+#        "add-ons;addon-google_apis-google-23" \
+#        "add-ons;addon-google_apis-google-22" \
+#        "add-ons;addon-google_apis-google-21" \
+#        "add-ons;addon-google_apis-google-19" \
+#        "add-ons;addon-google_apis-google-18" \
+#        "add-ons;addon-google_apis-google-17" \
+#        "add-ons;addon-google_apis-google-16" \
+#        > /dev/null && \
+#    echo "Installing emulator " && \
+#    yes | "$ANDROID_HOME"/tools/bin/sdkmanager "emulator" > /dev/null && \
+#    echo "Installing kotlin" && \
+#    wget --quiet -O sdk.install.sh "https://get.sdkman.io" && \
+#    bash -c "bash ./sdk.install.sh > /dev/null && source ~/.sdkman/bin/sdkman-init.sh && sdk install kotlin" && \
+#    rm -f sdk.install.sh && \
     # Install Flutter sdk
     cd /opt && \
     wget --quiet https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.12.13+hotfix.8-stable.tar.xz -O flutter.tar.xz && \
