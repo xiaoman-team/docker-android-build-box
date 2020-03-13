@@ -13,45 +13,22 @@ An optimized **docker** image includes **Android**, **Kotlin**, **Flutter sdk**.
 
 It includes the following components:
 
-* Ubuntu 18.04
-* Android SDK 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+* adoptopenjdk:8u242-b08-jdk-openj9-0.18.1
+* Android SDK 26 27 28 29
 * Android build tools:
-  * 17.0.0
-  * 18.1.1
-  * 19.1.0
-  * 20.0.0
-  * 21.1.2 22.0.1
-  * 23.0.1 23.0.2 23.0.3
-  * 24.0.0 24.0.1 24.0.2 24.0.3
-  * 25.0.0 25.0.1 25.0.2 25.0.3
-  * 26.0.0 26.0.1 26.0.2
-  * 27.0.1 27.0.2 27.0.3
-  * 28.0.1 28.0.2 28.0.3
-  * 29.0.2
-* Android NDK r21
-* extra-android-m2repository
-* extra-google-m2repository
-* extra-google-google\_play\_services
-* Google API add-ons
-* Android Emulator
-* Constraint Layout
-* TestNG
-* Python 2, Python 3
-* Node.js, npm, React Native
-* Ruby, RubyGems
-* fastlane
-* Kotlin 1.3
+  * 29.0.2 29.0.3
 * Flutter 1.12.13+hotfix.8
 
+# On Next IS ORIGIN:
 
 ## Pull Docker Image
 
-The docker image is publicly automated build on [Docker Hub](https://hub.docker.com/r/mingc/android-build-box/) 
+The docker image is publicly automated build on [Docker Hub](https://hub.docker.com/r/mingc/android-build-box/)
 based on the Dockerfile in this repo, so there is no hidden stuff in it. To pull the latest docker image:
 
     docker pull mingc/android-build-box:latest
 
-**Hint:** Use tag to sepecific a stable version rather than `latest` of docker image to avoid break your buid. 
+**Hint:** Use tag to sepecific a stable version rather than `latest` of docker image to avoid break your buid.
 e.g. `mingc/android-build-box:1.14.0`. Checkout [**Tags**](#tags) (bottom of this page) to see all the available tags.
 
 ## Usage
@@ -70,7 +47,7 @@ Run docker image with interactive bash shell:
 
 ### Build an Android project with Bitbucket pipeline
 
-If you have an Android project in a Bitbucket repository and want to use its pipeline to build it, 
+If you have an Android project in a Bitbucket repository and want to use its pipeline to build it,
 you can simply specify this docker image.
 Here is an example of `bitbucket-pipelines.yml`:
 
@@ -278,4 +255,3 @@ If you want to enhance this docker image or fix something, feel free to send [pu
 * [Build your own image](https://docs.docker.com/engine/getstarted/step_four/)
 * [uber android build environment](https://hub.docker.com/r/uber/android-build-environment/)
 * [Refactoring a Dockerfile for image size](https://blog.replicated.com/refactoring-a-dockerfile-for-image-size/)
-

@@ -15,10 +15,6 @@ ENV LANG="en_US.UTF-8" \
 
 RUN apt-get clean && apt-get update -qq && apt-get install -qq -y apt-utils locales && locale-gen $LANG
 
-ENV DEBIAN_FRONTEND="noninteractive" \
-    TERM=dumb \
-    DEBIAN_FRONTEND=noninteractive
-
 # Variables must be references after they are created
 ENV ANDROID_SDK_HOME="$ANDROID_HOME"
 ENV ANDROID_SDK_ROOT="$ANDROID_HOME"
@@ -92,11 +88,7 @@ RUN echo "Installing sdk tools ${ANDROID_SDK_TOOLS_VERSION}" && \
         "platform-tools" > /dev/null && \
     echo "Installing build tools " && \
     yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "build-tools;29.0.2" \
-        > /dev/null && \
-    echo "Installing build tools " && \
-    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
-        "build-tools;23.0.3" "build-tools;23.0.2" "build-tools;23.0.1" \
+        "build-tools;29.0.2" "build-tools;29.0.3" \
         > /dev/null && \
     # Install Flutter sdk
     cd /opt && \
