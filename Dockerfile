@@ -1,10 +1,9 @@
-FROM ubuntu:18.04
+FROM adoptopenjdk:8u242-b08-jdk-openj9-0.18.1
 
 MAINTAINER Ming Chen
 
 ENV ANDROID_HOME="/opt/android-sdk" \
-    FLUTTER_HOME="/opt/flutter" \
-    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+    FLUTTER_HOME="/opt/flutter" 
 
 # Get the latest version from https://developer.android.com/studio/index.html
 ENV ANDROID_SDK_TOOLS_VERSION="4333796"
@@ -57,7 +56,6 @@ RUN apt-get update -qq > /dev/null && \
         m4 \
         ncurses-dev \
         ocaml \
-        openjdk-8-jdk \
         openssh-client \
         pkg-config \
         software-properties-common \
