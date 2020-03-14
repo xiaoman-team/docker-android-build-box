@@ -1,4 +1,4 @@
-FROM adoptopenjdk:8u242-b08-jdk-openj9-0.18.1
+FROM adoptopenjdk:8-jdk-hotspot
 
 MAINTAINER Ming Chen
 
