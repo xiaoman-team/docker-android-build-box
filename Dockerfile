@@ -70,21 +70,25 @@ RUN echo "Installing sdk tools ${ANDROID_SDK_TOOLS_VERSION}" && \
 ENV PATH="$PATH:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools"
 
 # Install Android SDKs
+RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
+
 RUN echo "Accept sdk licenses " && \
     yes | sdkmanager --licenses && yes | sdkmanager --update
 
-RUN echo "Accept sdk licenses " && \
+RUN echo "Install Base-Tools " && \
     sdkmanager \
     "tools" \
     "platform-tools" \
     > /dev/null
 
-RUN sdkmanager \
+RUN echo "Install Build-Tools " && \
+  sdkmanager \
   "build-tools;28.0.3" \
   "build-tools;29.0.2" \
   > /dev/null
 
-RUN sdkmanager \
+RUN echo "Install Platforms " && \
+  sdkmanager \
   "platforms;android-28" \
   > /dev/null
 
@@ -96,7 +100,8 @@ RUN sdkmanager \
 ENV FLUTTER_HOME="/opt/flutter"
 
 # Download Flutter sdk
-RUN cd /opt && \
+RUN echo "Install Flutter sdk" && \
+    cd /opt && \
     wget --quiet https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.12.13+hotfix.8-stable.tar.xz -O flutter.tar.xz && \
     tar xf flutter.tar.xz && \
     rm -f flutter.tar.xz \
