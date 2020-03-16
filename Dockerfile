@@ -1,52 +1,23 @@
-FROM adoptopenjdk:8-jdk-hotspot
+FROM  ubuntu:18.04
 
 MAINTAINER JieChic
-
-WORKDIR /tmp
-
-# Set locale
-ENV LANG="en_US.UTF-8" \
-    LANGUAGE="en_US.UTF-8" \
-    LC_ALL="en_US.UTF-8"
-
-RUN apt-get clean && apt-get update -qq && apt-get install -qq -y apt-utils locales && locale-gen $LANG
 
 # Installing packages
 RUN apt-get update -qq > /dev/null && \
     apt-get install -qq locales > /dev/null && \
     locale-gen "$LANG" > /dev/null && \
     apt-get install -qq --no-install-recommends \
-        build-essential \
-        autoconf \
         curl \
         git \
-        file \
-        less \
-        vim-tiny \
-        gpg-agent \
-        lib32stdc++6 \
-        lib32z1 \
-        lib32z1-dev \
-        lib32ncurses5 \
-        libc6-dev \
-        libgmp-dev \
-        libmpc-dev \
-        libmpfr-dev \
-        libxslt-dev \
-        libxml2-dev \
-        m4 \
-        ncurses-dev \
-        ocaml \
         openssh-client \
-        pkg-config \
-        software-properties-common \
-        ruby-full \
-        software-properties-common \
         unzip \
         wget \
         zip \
-        zlib1g-dev \
+        openjdk-8-jdk \
+        libglu1-mesa \
         mysql-client > /dev/null
+
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 #
 #Install Android SDK
